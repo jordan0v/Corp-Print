@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ product.name }}</title>
+</head>
+<body>
+    <h1>{{ product.name }}</h1>
+    <p>{{ product.description }}</p>
+    <p>Price: {{ product.price }}</p>
+    <img src="{{ product.image.url }}" alt="Product Image">
+    <form id="orderForm">
+        {% csrf_token %}
+        <label for="customerName">Customer Name:</label>
+        <input type="text" id="customerName" name="customer_name">
+        <label for="customerEmail">Customer Email:</label>
+        <input type="email" id="customerEmail" name="customer_email">
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" value="1">
+        <button type="submit">Place Order</button>
+    </form>
+    <div id="orderMessage"></div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#orderForm').submit(function(event) {
+                event.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "order_create" product.id %}',
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        $('#orderMessage').text('Order placed successfully!');
+                    },
+                    error: function(xhr, errmsg, err) {
+                        $('#orderMessage').text('Error occurred while placing order.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
