@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}Выход{% endblock %}
+
+{% block content %}
+<h1>Вы успешно вышли из аккаунта!</h1>
+<p>You have been successfully logged out.
+    You can <a href="{% url "corp_print_app:login" %}">log-in again</a>. 
+</p>
+{% endblock %}

@@ -1,5 +1,9 @@
 from django.contrib import admin
-from .models import Template
+from .models import Profile, PrintTemplate
 
-# Register your models here.
-admin.site.register(Template)
+
+@admin.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ['user', 'date_of_birth', 'photo']
+    
+admin.site.register(PrintTemplate)

@@ -1,0 +1,14 @@
+{% extends "corp_print_app/base.html" %}
+
+{% block title %}Log-in{% endblock %}
+
+{% block content %}
+<h1>Авторизация</h1>
+<p>Используйте форму ниже для авторизации:</p>
+<form action="." method="post">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <p><input type="submit" value="Log in"></p>
+</form>
+<p><a href="{% url "password_reset" %}">Forgotten your  password?</a></p>
+{% endblock %}
